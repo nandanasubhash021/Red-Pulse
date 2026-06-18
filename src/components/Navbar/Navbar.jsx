@@ -1,4 +1,5 @@
 import React from 'react';
+import {Link} from "react-router-dom";
 import Button from '../Button/Button';
 import './Navbar.css';
 
@@ -15,9 +16,9 @@ const Navbar = () => {
         
         {/* MIDDLE NAVIGATION LINKS */}
         <ul className="nav-links">
-          <li><a href="#" className="active">Home</a></li>
-          <li><a href="#">About</a></li>
-          <li><a href="#">Contact</a></li>
+          <li><Link to="/" className="active">Home</Link></li>
+<li><Link to="/about">About</Link></li>
+<li><Link to="/contact">Contact</Link></li>
         </ul>
 
         {/* AUTHENTICATION ACTION BUTTONS */}

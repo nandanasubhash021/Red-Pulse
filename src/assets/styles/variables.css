@@ -1,0 +1,11 @@
+:root {
+  --primary-red: #E63946;
+  --dark-red: #C1121F;
+  --white: #FFFFFF;
+  --light-bg: #F8F9FA;
+  --dark-text: #212529;
+  --light-text: #6C757D;
+  --card-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+  --transition-smooth: all 0.3s ease;
+  --border-radius: 12px;
+}

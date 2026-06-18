@@ -1,0 +1,41 @@
+.hero-section {
+  padding: 6rem 2rem;
+  background: linear-gradient(135deg, #fff5f5 0%, #ffffff 100%);
+}
+
+.hero-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  align-items: center;
+  gap: 4rem;
+}
+
+.hero-content h1 {
+  font-size: 3.5rem;
+  font-weight: 800;
+  line-height: 1.2;
+  color: var(--dark-text);
+}
+
+.hero-content .highlight {
+  color: var(--primary-red);
+}
+
+.hero-content p {
+  font-size: 1.2rem;
+  color: var(--light-text);
+  margin: 1.5rem 0 2.5rem 0;
+}
+
+.hero-actions {
+  display: flex;
+  gap: 1.5rem;
+}
+
+.hero-image img {
+  width: 100%;
+  max-width: 540px;
+  border-radius: var(--border-radius);
+}

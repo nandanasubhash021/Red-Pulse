@@ -1,0 +1,31 @@
+.faq-section {
+  padding: 5rem 2rem;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.faq-container {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.faq-item {
+  background: var(--light-bg);
+  padding: 1.2rem 2rem;
+  border-radius: var(--border-radius);
+  cursor: pointer;
+}
+
+.faq-question {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.faq-answer {
+  margin-top: 1rem;
+  color: var(--light-text);
+  border-top: 1px solid #e9ecef;
+  padding-top: 0.8rem;
+}

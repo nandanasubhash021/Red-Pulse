@@ -1,0 +1,44 @@
+.home-page-wrapper {
+  overflow-x: hidden;
+}
+
+.emergency-banner-strip {
+  background: linear-gradient(135deg, #C1121F 0%, #E63946 100%);
+  color: var(--white);
+  padding: 3rem 2rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  max-width: 1200px;
+  margin: 4rem auto;
+  border-radius: var(--border-radius);
+  box-shadow: 0 10px 30px rgba(230, 57, 70, 0.2);
+}
+
+.banner-content h3 {
+  font-size: 1.8rem;
+  margin-bottom: 0.3rem;
+}
+
+.banner-btn {
+  background: var(--white);
+  color: var(--dark-red);
+  padding: 1rem 2rem;
+  font-weight: 700;
+  border-radius: var(--border-radius);
+  transition: var(--transition-smooth);
+}
+
+.banner-btn:hover {
+  transform: scale(1.05);
+  box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+}
+
+@media (max-width: 768px) {
+  .emergency-banner-strip {
+    flex-direction: column;
+    text-align: center;
+    gap: 1.5rem;
+    margin: 2rem 1rem;
+  }
+}

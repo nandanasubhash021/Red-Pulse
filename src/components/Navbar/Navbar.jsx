@@ -1,20 +1,29 @@
-import { Link } from "react-router-dom";
-import "./Navbar.css";
+import React from 'react';
+import Button from '../Button/Button';
+import './Navbar.css';
 
-function Navbar() {
+const Navbar = () => {
   return (
-    <nav>
-      <h2>RedPulse</h2>
+    <nav className="navbar">
+      <div className="nav-container">
+        <div className="logo-section">
+          <img src="/images/logo.png" alt="RedPulse Logo" className="logo-img" />
+          <span className="logo-text">RED<span className="accent">PULSE</span></span>
+        </div>
+        
+        <ul className="nav-links">
+          <li><a href="#" className="active">Home</a></li>
+          <li><a href="#">About</a></li>
+          <li><a href="#">Contact</a></li>
+        </ul>
 
-      <ul>
-        <li><Link to="/">Home</Link></li>
-        <li><Link to="/about">About</Link></li>
-        <li><Link to="/contact">Contact</Link></li>
-        <li><Link to="/login">Login</Link></li>
-        <li><Link to="/register">Register</Link></li>
-      </ul>
+        <div className="nav-auth">
+          <Button variant="secondary">Login</Button>
+          <Button variant="primary">Register</Button>
+        </div>
+      </div>
     </nav>
   );
-}
+};
 
 export default Navbar;

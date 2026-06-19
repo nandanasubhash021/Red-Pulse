@@ -6,15 +6,17 @@
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.03);
   z-index: 1000;
   padding: 1rem 0;
+  width: 100%;
 }
 
 .nav-container {
   max-width: 1200px;
   margin: 0 auto;
   display: flex;
-  justify-content: space-between;
+  justify-content: space-between; /* Securely isolates Logo (Left), Links (Middle), Buttons (Right) */
   align-items: center;
   padding: 0 2rem;
+  width: 100%;
 }
 
 .logo-section {
@@ -33,31 +35,44 @@
   font-size: 1.4rem;
   font-weight: 800;
   letter-spacing: -0.5px;
-  color: var(--dark-text);
+  color: var(--dark-text, #1a1d20); /* Uses dark color fallback if variable is empty */
 }
 
 .logo-text .accent {
-  color: var(--primary-red);
+  color: var(--primary-red, #e60026); /* Fallback to brand red */
 }
 
+/* --- SPACE BETWEEN LINKS FIXED HERE --- */
 .nav-links {
   display: flex;
   list-style: none;
-  gap: 2.5rem;
+  gap: 2.5rem; /* Forces 40px of physical air gap between Home, About, and Contact */
+  margin: 0;
+  padding: 0;
+  align-items: center;
+}
+
+.nav-links li {
+  display: inline-block;
 }
 
 .nav-links a {
-  font-weight: 500;
-  color: var(--dark-text);
-  transition: var(--transition-smooth);
+  font-weight: 600; /* Makes text clean and professional */
+  text-decoration: none; /* Removes any default underline */
+  color: var(--dark-text, #1a1d20); 
+  transition: color 0.2s ease-in-out;
+  padding: 0.5rem 0.2rem; /* Adds safe clickable surface area */
 }
 
 .nav-links a:hover, 
 .nav-links a.active {
-  color: var(--primary-red);
+  color: var(--primary-red, #e60026); /* Lights up active or hovered page link in red */
 }
 
+/* --- SPACE BETWEEN LINKS AND BUTTONS FIXED HERE --- */
 .nav-auth {
   display: flex;
-  gap: 1rem;
+  align-items: center;
+  gap: 1.2rem; /* Creates perfect space between Login and Register buttons */
+  margin-left: 2rem; /* Extra protective gap so right-side elements never touch the links */
 }

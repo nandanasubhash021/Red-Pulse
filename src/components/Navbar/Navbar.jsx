@@ -1,9 +1,13 @@
 import React from 'react';
-import {Link} from "react-router-dom";
+// 1. Added useLocation to the react-router-dom import
+import { Link, useLocation } from "react-router-dom";
 import Button from '../Button/Button';
 import './Navbar.css';
 
 const Navbar = () => {
+  // 2. Initialize the location hook to listen to the browser URL path
+  const location = useLocation();
+
   return (
     <nav className="navbar">
       <div className="nav-container">
@@ -16,9 +20,31 @@ const Navbar = () => {
         
         {/* MIDDLE NAVIGATION LINKS */}
         <ul className="nav-links">
-          <li><Link to="/" className="active">Home</Link></li>
-<li><Link to="/about">About</Link></li>
-<li><Link to="/contact">Contact</Link></li>
+          {/* 3. Replaced hardcoded classes with dynamic checks */}
+          <li>
+            <Link 
+              to="/" 
+              className={location.pathname === '/' ? 'active' : ''}
+            >
+              Home
+            </Link>
+          </li>
+          <li>
+            <Link 
+              to="/about" 
+              className={location.pathname === '/about' ? 'active' : ''}
+            >
+              About
+            </Link>
+          </li>
+          <li>
+            <Link 
+              to="/contact" 
+              className={location.pathname === '/contact' ? 'active' : ''}
+            >
+              Contact
+            </Link>
+          </li>
         </ul>
 
         {/* AUTHENTICATION ACTION BUTTONS */}

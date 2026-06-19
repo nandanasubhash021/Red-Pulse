@@ -1,0 +1,334 @@
+.about-page {
+  --primary-red: #e60026;
+  --hover-red: #b3001b;
+  --bg-light: #f8f9fa;
+  --bg-white: #ffffff;
+  --text-dark: #1a1d20;
+  --text-muted: #5a626a;
+  
+  background-color: var(--bg-white);
+  color: var(--text-dark);
+  line-height: 1.6;
+}
+
+.about-container {
+  width: 90%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 4rem 0;
+}
+
+/* --- Section Shared Headers --- */
+.section-header {
+  text-align: center;
+  margin-bottom: 3rem;
+}
+
+.section-header.align-left {
+  text-align: left;
+}
+
+.section-header h2 {
+  font-size: 2.25rem;
+  font-weight: 700;
+  color: var(--text-dark);
+  margin-bottom: 0.5rem;
+}
+
+.header-line {
+  width: 60px;
+  height: 4px;
+  background-color: var(--primary-red);
+  margin: 0 auto;
+  border-radius: 2px;
+}
+
+.section-header.align-left .header-line {
+  margin: 0;
+  width: 70%;
+}
+
+/* --- 1. Hero Section --- */
+.about-hero {
+  background: linear-gradient(rgba(26, 29, 32, 0.75), rgba(26, 29, 32, 0.75)), 
+              url('../../../public/hero-banner.jpg') no-repeat center center/cover;
+  min-height: 40vh;
+  display: flex;
+  align-items: center;
+}
+
+.about-hero-overlay {
+  width: 100%;
+}
+
+.about-hero h1 {
+  font-size: 3rem;
+  color: var(--bg-white);
+  margin-bottom: 1rem;
+  font-weight: 800;
+}
+
+.about-hero p {
+  font-size: 1.25rem;
+  color: #e9ecef;
+  max-width: 600px;
+}
+
+/* --- 2 & 3. Mission & Vision --- */
+.mission-vision-section {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 2.5rem;
+}
+
+.mv-card {
+  background: var(--bg-light);
+  padding: 3rem 2rem;
+  border-radius: 12px;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+  border-top: 5px solid var(--primary-red);
+  transition: transform 0.3s ease;
+}
+
+.mv-card:hover {
+  transform: translateY(-5px);
+}
+
+.mv-icon-wrapper {
+  background-color: rgba(230, 0, 38, 0.1);
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 1.5rem;
+}
+
+.mv-icon {
+  font-size: 2rem;
+  color: var(--primary-red);
+}
+
+.mv-card h2 {
+  font-size: 1.75rem;
+  margin-bottom: 1rem;
+}
+
+.mv-card p {
+  color: var(--text-muted);
+}
+
+/* --- 4. How It Works --- */
+.how-it-works-section {
+  background-color: var(--bg-light);
+}
+
+.steps-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 2rem;
+}
+
+.step-card {
+  background: var(--bg-white);
+  padding: 3rem 2rem;
+  border-radius: 12px;
+  text-align: center;
+  position: relative;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.03);
+}
+
+.step-number {
+  position: absolute;
+  top: 1rem;
+  left: 1.5rem;
+  font-size: 3rem;
+  font-weight: 900;
+  color: rgba(230, 0, 38, 0.08);
+  line-height: 1;
+}
+
+.step-icon {
+  font-size: 2.5rem;
+  color: var(--primary-red);
+  margin-bottom: 1.25rem;
+}
+
+.step-card h3 {
+  font-size: 1.35rem;
+  margin-bottom: 0.75rem;
+}
+
+.step-card p {
+  color: var(--text-muted);
+  font-size: 0.95rem;
+}
+
+/* --- 5. Why Donate Section --- */
+.why-donate-section {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 4rem;
+  align-items: center;
+}
+
+.why-donate-content p {
+  color: var(--text-muted);
+  margin-bottom: 1.5rem;
+  font-size: 1.1rem;
+}
+
+.benefits-list {
+  list-style: none;
+  padding: 0;
+}
+
+.benefits-list li {
+  display: flex;
+  align-items: center;
+  margin-bottom: 1rem;
+  font-weight: 500;
+}
+
+.list-icon {
+  color: var(--primary-red);
+  font-size: 1.25rem;
+  margin-right: 0.75rem;
+  flex-shrink: 0;
+}
+
+.why-donate-image-placeholder {
+  background: linear-gradient(135deg, rgba(230, 0, 38, 0.05) 0%, rgba(230, 0, 38, 0.15) 100%);
+  border-radius: 16px;
+  height: 350px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 2px dashed rgba(230, 0, 38, 0.2);
+}
+
+.image-graphic-heart {
+  font-size: 5rem;
+  animation: pulse-heart 2s infinite ease-in-out;
+}
+
+@keyframes pulse-heart {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.15); }
+}
+
+/* --- 6. Statistics Section --- */
+.about-stats-section {
+  background-color: var(--primary-red);
+  color: var(--bg-white);
+  padding: 2rem 0;
+}
+
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 2rem;
+  text-align: center;
+  padding: 1rem 0;
+}
+
+.stat-item h3 {
+  font-size: 3rem;
+  font-weight: 800;
+  margin-bottom: 0.25rem;
+}
+
+.stat-item p {
+  font-size: 1.1rem;
+  opacity: 0.9;
+}
+
+/* --- 7. Call To Action --- */
+.about-cta {
+  background: linear-gradient(rgba(26, 29, 32, 0.9), rgba(26, 29, 32, 0.9));
+  text-align: center;
+}
+
+.cta-content h2 {
+  color: var(--bg-white);
+  font-size: 2.5rem;
+  margin-bottom: 1rem;
+}
+
+.cta-content p {
+  color: #ced4da;
+  max-width: 600px;
+  margin: 0 auto 2.5rem auto;
+  font-size: 1.15rem;
+}
+
+.cta-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 1.5rem;
+  flex-wrap: wrap;
+}
+
+.btn-primary-about, .btn-secondary-about {
+  padding: 0.85rem 2rem;
+  border-radius: 6px;
+  font-weight: 600;
+  text-decoration: none;
+  transition: all 0.2s ease;
+}
+
+.btn-primary-about {
+  background-color: var(--primary-red);
+  color: var(--bg-white);
+}
+
+.btn-primary-about:hover {
+  background-color: var(--hover-red);
+}
+
+.btn-secondary-about {
+  background-color: transparent;
+  color: var(--bg-white);
+  border: 2px solid var(--bg-white);
+}
+
+.btn-secondary-about:hover {
+  background-color: var(--bg-white);
+  color: var(--text-dark);
+}
+
+/* --- 8. Responsive Breakdown --- */
+@media (max-width: 992px) {
+  .why-donate-section {
+    grid-template-columns: 1fr;
+    gap: 2.5rem;
+  }
+  
+  .why-donate-image-placeholder {
+    height: 250px;
+    order: -1;
+  }
+}
+
+@media (max-width: 768px) {
+  .about-container {
+    padding: 3rem 0;
+  }
+
+  .about-hero h1 {
+    font-size: 2.25rem;
+  }
+
+  .about-hero p {
+    font-size: 1.1rem;
+  }
+
+  .section-header h2 {
+    font-size: 1.85rem;
+  }
+
+  .cta-content h2 {
+    font-size: 1.85rem;
+  }
+}

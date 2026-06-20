@@ -11,8 +11,8 @@ const ContactForm = () => {
           <p>Have operational or connectivity questions? Reach our processing team directly.</p>
           <div className="details-list">
             <p>📧 support@redpulse.org</p>
-            <p>📞 +1 (555) 019-2831</p>
-            <p>📍 Medical Hub Crossing, Building 4B</p>
+            <p>📞 +91 484 234 5678</p>
+            <p>📍 Red Pulse Innovation Hub ,MG Road,Ernakulam,Kerala-682016</p>
           </div>
         </div>
         <form className="contact-form-element" onSubmit={(e) => e.preventDefault()}>

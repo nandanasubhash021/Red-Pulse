@@ -1,7 +1,14 @@
 import React from 'react';
+// 🌟 CRITICAL: Import Link from react-router-dom to handle SPA page swapping without refreshes
+import { Link } from 'react-router-dom';
 import './Footer.css';
 
 const Footer = () => {
+  // Handy utility to smoothly pull the page window back to the top when navigating
+  const scrollToTop = () => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
+
   return (
     <footer className="footer">
       <div className="footer-container">
@@ -17,17 +24,18 @@ const Footer = () => {
         {/* QUICK NAVIGATION */}
         <div className="footer-links">
           <h4>Quick Links</h4>
-          <a href="#">Home</a>
-          <a href="#">About</a>
-          <a href="#">Contact</a>
+          {/* 🌟 FIXED: Swapped <a> with <Link to="..."> and added top-scrolling */}
+          <Link to="/" onClick={scrollToTop}>Home</Link>
+          <Link to="/about" onClick={scrollToTop}>About</Link>
+          <Link to="/contact" onClick={scrollToTop}>Contact</Link>
         </div>
         
         {/* MEDICAL PORTALS SERVICES */}
         <div className="footer-services">
           <h4>Services</h4>
-          <a href="#">Find Donor</a>
-          <a href="#">Blood Banks</a>
-          <a href="#">Emergency Request</a>
+          <Link to="/find-donor" onClick={scrollToTop}>Find Donor</Link>
+          <Link to="/blood-banks" onClick={scrollToTop}>Blood Banks</Link>
+          <Link to="/emergency" onClick={scrollToTop}>Emergency Request</Link>
         </div>
       </div>
       

@@ -1,0 +1,268 @@
+.contact-page {
+  --primary-red: #e60026;
+  --hover-red: #b3001b;
+  --bg-light: #f8f9fa;
+  --bg-white: #ffffff;
+  --text-dark: #1a1d20;
+  --text-muted: #5a626a;
+  --border-color: #e2e8f0;
+  
+  background-color: var(--bg-white);
+  color: var(--text-dark);
+  line-height: 1.6;
+}
+
+.contact-container {
+  width: 90%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 4rem 0;
+}
+
+/* --- Section Shared Headers --- */
+.section-header {
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.section-header.align-left {
+  text-align: left;
+}
+
+.section-header h2 {
+  font-size: 2.25rem;
+  font-weight: 700;
+  color: var(--text-dark);
+  margin-bottom: 0.5rem;
+  display: inline-block;        
+}
+
+.header-line {
+  width: 100%;
+  height: 4px;
+  background-color: var(--primary-red);
+  margin-top: 0.5rem;
+  border-radius: 2px;
+}
+
+.section-header.align-left .header-line {
+  margin-left: 0;
+  margin-right: auto;
+}
+
+/* --- 1. Hero Section Layout --- */
+.contact-hero {
+  /* Background styling is safely injected inline via Contact.jsx to prevent path breaks */
+  min-height: 40vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  width: 100%;
+}
+
+.contact-hero-overlay {
+  width: 100%;
+  max-width: 800px;        
+  margin: 0 auto;          
+  padding: 0 1rem;
+}
+
+.contact-hero h1 {
+  font-size: 3rem;
+  color: var(--bg-white);
+  margin-bottom: 1.25rem;  
+  font-weight: 800;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.4); 
+}
+
+.contact-hero p {
+  font-size: 1.25rem;
+  color: #e9ecef;
+  max-width: 650px;        
+  margin: 0 auto;          
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.4);
+}
+
+/* --- 2. Content Split Grid Layout System --- */
+.contact-grid {
+  display: grid;
+  grid-template-columns: 1fr 1.2fr;
+  gap: 5rem;
+  align-items: start;
+}
+
+.sidebar-intro {
+  color: var(--text-muted);
+  margin-bottom: 2.5rem;
+  font-size: 1.05rem;
+}
+
+/* --- Left Column: Contact Info Cards --- */
+.info-cards-list {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  margin-bottom: 3rem;
+}
+
+.info-card {
+  display: flex;
+  gap: 1.25rem;
+  align-items: flex-start;
+}
+
+.info-icon-wrapper {
+  background-color: rgba(230, 0, 38, 0.1);
+  width: 50px;
+  height: 50px;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.info-icon {
+  font-size: 1.6rem;
+  color: var(--primary-red);
+}
+
+.info-text h3 {
+  font-size: 1.15rem;
+  font-weight: 700;
+  margin: 0 0 0.25rem 0;
+}
+
+.info-text p {
+  font-size: 1rem;
+  margin: 0;
+  color: var(--text-dark);
+}
+
+.info-text .subtext {
+  font-size: 0.88rem;
+  color: var(--text-muted);
+  margin-top: 0.15rem;
+}
+
+/* --- Live Google Map Container --- */
+.map-wrapper {
+  width: 100%;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+  border: 1px solid var(--border-color);
+}
+
+.map-wrapper iframe {
+  display: block;
+  filter: grayscale(10%) contrast(110%); /* Subtle filter to make map match premium site aesthetic */
+}
+
+/* --- Right Column: Message Input Form --- */
+.contact-form-wrapper {
+  background-color: var(--bg-light);
+  padding: 3.5rem 2.5rem;
+  border-radius: 16px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.02);
+  border-top: 5px solid var(--primary-red);
+}
+
+.actual-contact-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  margin-top: 2rem;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.form-group label {
+  font-weight: 600;
+  font-size: 0.95rem;
+  color: var(--text-dark);
+}
+
+.form-group input, 
+.form-group textarea {
+  padding: 0.85rem 1rem;
+  border-radius: 8px;
+  border: 1px solid var(--border-color);
+  background-color: var(--bg-white);
+  font-size: 1rem;
+  color: var(--text-dark);
+  font-family: inherit;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.form-group input:focus, 
+.form-group textarea:focus {
+  outline: none;
+  border-color: var(--primary-red);
+  box-shadow: 0 0 0 3px rgba(230, 0, 38, 0.12);
+}
+
+.form-group textarea {
+  resize: vertical;
+}
+
+/* --- Submit Action Button --- */
+.btn-submit-contact {
+  background-color: var(--primary-red);
+  color: var(--bg-white);
+  border: none;
+  padding: 1rem 2rem;
+  border-radius: 8px;
+  font-weight: 600;
+  font-size: 1rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  transition: background-color 0.2s ease, transform 0.1s ease;
+  margin-top: 0.5rem;
+}
+
+.btn-submit-contact:hover {
+  background-color: var(--hover-red);
+}
+
+.btn-submit-contact:active {
+  transform: scale(0.98);
+}
+
+.btn-send-icon {
+  font-size: 1.2rem;
+}
+
+/* --- Responsive Media Viewport Breakdowns --- */
+@media (max-width: 992px) {
+  .contact-grid {
+    grid-template-columns: 1fr;
+    gap: 4rem;
+  }
+  
+  .contact-form-wrapper {
+    padding: 2.5rem 1.5rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .contact-container {
+    padding: 2.5rem 0;
+  }
+
+  .contact-hero h1 {
+    font-size: 2.25rem;
+  }
+
+  .contact-hero p {
+    font-size: 1.1rem;
+  }
+}

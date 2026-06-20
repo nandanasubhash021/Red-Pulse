@@ -36,11 +36,11 @@
   font-size: 1.4rem;
   font-weight: 800;
   letter-spacing: -0.5px;
-  color: var(--dark-text, #1a1d20);
+  color: #1a1d20;
 }
 
 .logo-text .accent {
-  color: var(--primary-red, #e63946); /* Matches your signature RedPulse brand color */
+  color: #e60026; /* 🌟 FIXED: Matches your exact signature About.css brand color */
 }
 
 .nav-links {
@@ -52,13 +52,13 @@
 .nav-links a {
   font-weight: 500;
   text-decoration: none;
-  color: var(--dark-text, #1a1d20);
+  color: #1a1d20;
   transition: all 0.3s ease;
 }
 
 .nav-links a:hover, 
 .nav-links a.active {
-  color: var(--primary-red, #e63946);
+  color: #e60026; /* 🌟 FIXED: Matches your exact signature About.css brand color */
 }
 
 .nav-auth {

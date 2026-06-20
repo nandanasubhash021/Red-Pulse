@@ -33,7 +33,7 @@
   font-weight: 700;
   color: var(--text-dark);
   margin-bottom: 0.5rem;
-  display: inline-block;        /* 🌟 ADD THIS SPECIFIC LINE */
+  display: inline-block;        
 }
 
 .header-line {
@@ -50,36 +50,39 @@
 }
 
 /* --- 1. Hero Section --- */
-/* --- 1. Hero Section --- */
 .about-hero {
-  background: linear-gradient(rgba(26, 29, 32, 0.75), rgba(26, 29, 32, 0.75)), 
-              url('../../../public/hero-banner.jpg') no-repeat center center/cover;
-  min-height: 40vh;
+  /* 🌟 NOTE: Background image properties are safely managed inside your About.jsx inline styles */
+  min-height: 45vh;
   display: flex;
   align-items: center;
-  justify-content: center; /* 🌟 ADDED: Centers the content box horizontally */
-  text-align: center;      /* 🌟 ADDED: Centers the text alignment inside */
+  justify-content: center;
+  text-align: center;
+  width: 100%;
 }
 
 .about-hero-overlay {
   width: 100%;
-  max-width: 800px;        /* 🌟 ADDED: Keeps the text box structured and neat */
-  margin: 0 auto;          /* 🌟 ADDED: Centers the overlay row container */
+  max-width: 800px;        
+  margin: 0 auto;          
+  padding: 0 1rem;
 }
 
 .about-hero h1 {
   font-size: 3rem;
   color: var(--bg-white);
-  margin-bottom: 1.25rem;  /* 🌟 UPDATED: Gives a better air gap above the text */
+  margin-bottom: 1.25rem;  
   font-weight: 800;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3); /* Soft text shadow for readability over high contrast image areas */
 }
 
 .about-hero p {
   font-size: 1.25rem;
   color: #e9ecef;
-  max-width: 650px;        /* 🌟 UPDATED: Perfect length for a clean multi-line block */
-  margin: 0 auto;          /* 🌟 ADDED: Centers the paragraph directly beneath the H1 */
+  max-width: 650px;        
+  margin: 0 auto;          
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
 }
+
 /* --- 2 & 3. Mission & Vision --- */
 .mission-vision-section {
   display: grid;

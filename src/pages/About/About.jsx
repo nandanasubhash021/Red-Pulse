@@ -8,7 +8,6 @@ import {
   BiCheckShield, 
   BiHeart 
 } from 'react-icons/bi';
-// Matching your exact path from the screenshot:
 import Navbar from "../../components/Navbar/Navbar"; 
 import Footer from '../../components/Footer/Footer';
 import './About.css';
@@ -19,7 +18,13 @@ function About() {
       <Navbar />
 
       {/* 1. Hero Section */}
-      <section className="about-hero">
+      {/* 🌟 FIXED PATH: Inline styling references the correct nested static asset directory location */}
+      <section 
+        className="about-hero"
+        style={{
+          background: `linear-gradient(rgba(26, 29, 32, 0.75), rgba(26, 29, 32, 0.75)), url('/images/hero-banner.jpg') no-repeat center center/cover`
+        }}
+      >
         <div className="about-hero-overlay">
           <div className="about-container">
             <h1>About RedPulse</h1>

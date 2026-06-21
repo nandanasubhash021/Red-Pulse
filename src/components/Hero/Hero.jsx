@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom'; // 🌟 Added Link for page navigation
 import Button from '../Button/Button';
 import './Hero.css';
 
@@ -10,8 +11,15 @@ const Hero = () => {
           <h1>Save Lives Through <br/><span className="highlight">Blood Donation</span></h1>
           <p>Connecting donors, patients, and blood banks seamlessly in one trusted real-time automated network.</p>
           <div className="hero-actions">
-            <Button variant="primary">Become a Donor</Button>
-            <Button variant="outline">Find Blood</Button>
+            {/* Redirects to registration page */}
+            <Link to="/register">
+              <Button variant="primary">Become a Donor</Button>
+            </Link>
+            
+            {/* Redirects to the dynamic search portal */}
+            <Link to="/find-donors">
+              <Button variant="outline">Find Blood</Button>
+            </Link>
           </div>
         </div>
         <div className="hero-image">

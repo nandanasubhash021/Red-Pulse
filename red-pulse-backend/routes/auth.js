@@ -97,4 +97,30 @@ router.post('/login', async (req, res) => {
   }
 });
 
+// @route   GET api/auth/search
+// @desc    Search for blood donors by blood group and district
+// @access  Public
+router.get('/search', async (req, res) => {
+  try {
+    const { bloodGroup, district } = req.query;
+    let query = {};
+
+    // Apply dynamic sorting metrics based on query parameters
+    if (bloodGroup) {
+      query.bloodGroup = bloodGroup;
+    }
+    if (district) {
+      // Allows partial matching and drops case sensitivity (e.g. "brooklyn" matches "Brooklyn")
+      query.district = { $regex: district, $options: 'i' }; 
+    }
+
+    // Query documents but strip private fields for data privacy
+    const donors = await User.find(query).select('-password');
+    res.status(200).json(donors);
+  } catch (err) {
+    console.error("Search API Error:", err.message);
+    res.status(500).send('Server Error: ' + err.message);
+  }
+});
+
 module.exports = router;

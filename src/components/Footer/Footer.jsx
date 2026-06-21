@@ -33,7 +33,8 @@ const Footer = () => {
         {/* MEDICAL PORTALS SERVICES */}
         <div className="footer-services">
           <h4>Services</h4>
-          <Link to="/find-donor" onClick={scrollToTop}>Find Donor</Link>
+          {/* 🌟 TYPO FIXED: Changed /find-donor to /find-donors to match your router engine */}
+          <Link to="/find-donors" onClick={scrollToTop}>Find Donor</Link>
           <Link to="/blood-banks" onClick={scrollToTop}>Blood Banks</Link>
           <Link to="/emergency" onClick={scrollToTop}>Emergency Request</Link>
         </div>

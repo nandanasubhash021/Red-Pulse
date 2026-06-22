@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { 
   BiGridAlt, BiUser, BiPlusMedical, BiNotification, 
-  BiLogOut, BiSend, BiCheckCircle, BiXCircle, BiCalendar
+  BiLogOut, BiSend, BiCalendar
 } from 'react-icons/bi';
 import Navbar from '../../components/Navbar/Navbar';
 import Footer from '../../components/Footer/Footer';
@@ -9,8 +9,6 @@ import './UserDashboard.css';
 
 function UserDashboard() {
   const [activeTab, setActiveTab] = useState('overview');
-  
-  // LIVE PROFILE DATA COUPLING STATE
   const [userData, setUserData] = useState(null);
   const [loading, setLoading] = useState(true);
 
@@ -26,7 +24,6 @@ function UserDashboard() {
     patientCase: ''
   });
 
-  // 🌟 AUTOMATIC BACKGROUND FETCH FROM MONGODB USING LOGGED-IN TOKEN
   useEffect(() => {
     const fetchUserProfile = async () => {
       try {
@@ -36,7 +33,6 @@ function UserDashboard() {
           return;
         }
 
-        // Connect directly to our brand-new backend /me route
         const response = await fetch("http://localhost:5000/api/auth/me", {
           method: "GET",
           headers: {
@@ -47,7 +43,7 @@ function UserDashboard() {
 
         if (response.ok) {
           const data = await response.json();
-          setUserData(data); // 🌟 Populate dashboard fields!
+          setUserData(data); 
           
           if (data.gender) setGender(data.gender);
           if (data.lastDonationDate) setLastDonationDate(data.lastDonationDate.split('T')[0]);

@@ -16,7 +16,7 @@
 .rp-panel h2 { font-size: 1.5rem; margin-top: 0; margin-bottom: 1.5rem; color: #111827; border-left: 4px solid #e60026; padding-left: 12px; }
 .rp-form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; }
 .rp-input-group { display: flex; flex-direction: column; gap: 0.5rem; margin-bottom: 1.25rem; }
-.rp-input { width: 100%; padding: 12px; border: 1px solid #d1d5db; border-radius: 8px; background-color: #f9fafb; }
+.rp-input { width: 100%; padding: 12px; border: 1px solid #d1d5db; border-radius: 8px; background-color: #f9fafb; color: #111827; }
 .rp-submit-btn { background: #e60026; color: white; padding: 14px 28px; border: none; border-radius: 8px; font-weight: bold; cursor: pointer; display: flex; align-items: center; gap: 0.5rem; }
 .rp-card { padding: 1.75rem; background: #f9fafb; border-radius: 12px; border: 1px solid #e5e7eb; margin-bottom: 1.5rem; }
 .rp-profile-details-read p { margin: 0 0 0.5rem 0; font-size: 1rem; color: #374151; }
@@ -29,3 +29,13 @@
 .rp-spinner { border: 4px solid rgba(0, 0, 0, 0.1); width: 42px; height: 42px; border-radius: 50%; border-left-color: #e60026; animation: spin 1s linear infinite; margin-bottom: 1rem; }
 @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
 @media (max-width: 992px) { .rp-grid-layout { grid-template-columns: 1fr !important; } .rp-form-row { grid-template-columns: 1fr; } }
+
+/* Fixes for unreadable dropdown selections & floating lists */
+select.rp-input {
+  color: #111827 !important;
+  background-color: #ffffff !important;
+}
+select.rp-input option {
+  color: #111827 !important;
+  background-color: #ffffff !important;
+}

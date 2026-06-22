@@ -34,13 +34,18 @@ router.post('/register', async (req, res) => {
 
     const payload = { user: { id: user.id } };
 
-    jwt.sign(payload, process.env.JWT_SECRET, { expiresIn: '3h' }, (err, token) => {
-      if (err) throw err;
-      res.status(200).json({
-        token,
-        user: { id: user.id, name: user.name, email: user.email }
-      });
-    });
+    jwt.sign(
+      payload, 
+      process.env.JWT_SECRET || 'redpulse_secret_key', 
+      { expiresIn: '3h' }, 
+      (err, token) => {
+        if (err) throw err;
+        res.status(200).json({
+          token,
+          user: { id: user.id, name: user.name, email: user.email }
+        });
+      }
+    );
 
   } catch (err) {
     console.error("Backend Registration Error:", err.message);
@@ -76,7 +81,7 @@ router.post('/login', async (req, res) => {
 
     jwt.sign(
       payload,
-      process.env.JWT_SECRET,
+      process.env.JWT_SECRET || 'redpulse_secret_key',
       { expiresIn: '3h' },
       (err, token) => {
         if (err) throw err;
@@ -105,21 +110,49 @@ router.get('/search', async (req, res) => {
     const { bloodGroup, district } = req.query;
     let query = {};
 
-    // Apply dynamic sorting metrics based on query parameters
     if (bloodGroup) {
       query.bloodGroup = bloodGroup;
     }
     if (district) {
-      // Allows partial matching and drops case sensitivity (e.g. "brooklyn" matches "Brooklyn")
       query.district = { $regex: district, $options: 'i' }; 
     }
 
-    // Query documents but strip private fields for data privacy
     const donors = await User.find(query).select('-password');
     res.status(200).json(donors);
   } catch (err) {
     console.error("Search API Error:", err.message);
     res.status(500).send('Server Error: ' + err.message);
+  }
+});
+
+// 🌟 ADDED: PROFILE RECOVERY ROADWAY
+// @route   GET api/auth/me
+// @desc    Get currently logged-in donor profile details from MongoDB
+// @access  Private
+router.get('/me', async (req, res) => {
+  try {
+    // 1. Grab token out of incoming authorization headers
+    const authHeader = req.headers['authorization'];
+    const token = authHeader && authHeader.split(' ')[1];
+
+    if (!token) {
+      return res.status(401).json({ msg: 'No token found, authorization denied' });
+    }
+
+    // 2. Verify if the token signature is authentic
+    const decoded = jwt.verify(token, process.env.JWT_SECRET || 'redpulse_secret_key');
+    
+    // 3. Fetch full profile matching that specific ID out of MongoDB (exclude password security hash)
+    const user = await User.findById(decoded.user.id).select('-password');
+    
+    if (!user) {
+      return res.status(404).json({ msg: 'User profile does not exist in database' });
+    }
+
+    res.status(200).json(user);
+  } catch (err) {
+    console.error("Profile API Fetch Error:", err.message);
+    res.status(401).json({ msg: 'Token validation failed or expired' });
   }
 });
 

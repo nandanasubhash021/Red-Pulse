@@ -6,7 +6,10 @@ import About from "./pages/About/About";
 import Contact from "./pages/Contact/Contact";
 import Login from "./pages/Login/Login";
 import Register from "./pages/Register/Register";
-import FindDonors from './pages/FindDonors/FindDonors'; // Imported page entry
+import FindDonors from './pages/FindDonors/FindDonors'; 
+
+// 🌟 Imported your new UserDashboard component folder structure
+import UserDashboard from "./pages/UserDashboard/UserDashboard";
 
 function App() {
   return (
@@ -16,9 +19,10 @@ function App() {
       <Route path="/contact" element={<Contact />} />
       <Route path="/login" element={<Login />} />
       <Route path="/register" element={<Register />} />
-      
-      {/* The missing URL route path matching your search interface */}
       <Route path="/find-donors" element={<FindDonors />} />
+      
+      {/* 🌟 New route added to match your user account panel entry */}
+      <Route path="/dashboard" element={<UserDashboard />} />
     </Routes>
   );
 }

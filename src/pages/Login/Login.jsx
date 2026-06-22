@@ -18,9 +18,11 @@ function Login() {
       const data = await response.json();
       
       if (response.ok) {
-        localStorage.setItem('token', data.token); // Store authorization payload securely
-        alert(`Welcome back to Red Pulse!`);
-        navigate('/'); // Redirect to homepage
+        // 1. Store authorization payload string securely
+        localStorage.setItem('token', data.token); 
+        
+        // 2. 🌟 REMOVED POPUP ALERT: Instantly slide right into the dashboard path
+        navigate('/dashboard'); 
       } else {
         alert(data.msg || 'Login failed');
       }
@@ -33,16 +35,30 @@ function Login() {
   return (
     <>
       <Navbar />
-      <div style={{ maxWidth: '400px', margin: '60px auto', padding: '30px', border: '1px solid #ddd', borderRadius: '8px', boxShadow: '0 4px 6px rgba(0,0,0,0.05)' }}>
-        <h2 style={{ color: '#cc0000', marginBottom: '20px' }}>Login</h2>
+      <div style={{ maxWidth: '400px', margin: '60px auto', padding: '30px', border: '1px solid #ddd', borderRadius: '8px', boxShadow: '0 4px 6px rgba(0,0,0,0.05)', backgroundColor: '#ffffff' }}>
+        <h2 style={{ color: '#cc0000', marginBottom: '20px', fontFamily: 'sans-serif' }}>Login</h2>
         <form onSubmit={handleLoginSubmit}>
-          <label style={{ display: 'block', marginBottom: '5px' }}>Email Address</label>
-          <input type="email" placeholder="Enter email" required style={{ width: '100%', padding: '8px', marginBottom: '15px' }} onChange={e => setCredentials({...credentials, email: e.target.value})} />
+          <label style={{ display: 'block', marginBottom: '5px', fontWeight: '600', color: '#333' }}>Email Address</label>
+          <input 
+            type="email" 
+            placeholder="Enter email" 
+            required 
+            style={{ width: '100%', padding: '10px', marginBottom: '15px', border: '1px solid #ccc', borderRadius: '6px', boxSizing: 'border-box' }} 
+            onChange={e => setCredentials({...credentials, email: e.target.value})} 
+          />
           
-          <label style={{ display: 'block', marginBottom: '5px' }}>Password</label>
-          <input type="password" placeholder="Enter password" required style={{ width: '100%', padding: '8px', marginBottom: '20px' }} onChange={e => setCredentials({...credentials, password: e.target.value})} />
+          <label style={{ display: 'block', marginBottom: '5px', fontWeight: '600', color: '#333' }}>Password</label>
+          <input 
+            type="password" 
+            placeholder="Enter password" 
+            required 
+            style={{ width: '100%', padding: '10px', marginBottom: '20px', border: '1px solid #ccc', borderRadius: '6px', boxSizing: 'border-box' }} 
+            onChange={e => setCredentials({...credentials, password: e.target.value})} 
+          />
           
-          <button type="submit" style={{ width: '100%', backgroundColor: '#cc0000', color: 'white', border: 'none', padding: '10px', borderRadius: '4px', cursor: 'pointer', fontWeight: 'bold' }}>Login</button>
+          <button type="submit" style={{ width: '100%', backgroundColor: '#cc0000', color: 'white', border: 'none', padding: '12px', borderRadius: '6px', cursor: 'pointer', fontWeight: 'bold', fontSize: '1rem' }}>
+            Login
+          </button>
         </form>
       </div>
     </>

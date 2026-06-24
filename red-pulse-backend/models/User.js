@@ -37,6 +37,31 @@ const UserSchema = new mongoose.Schema({
     hadRecentSurgery: { type: Boolean, default: false },
     daysSinceLastDonation: { type: Number, default: 100 }
   },
+
+  // 🌟 NEW ELIGIBILITY & HEALTH TRACKING FIELDS
+  gender: { 
+    type: String, 
+    enum: ['male', 'female'], 
+    default: 'female' 
+  },
+  lastDonationDate: { 
+    type: Date, 
+    default: null 
+  },
+  healthStatus: {
+    type: String,
+    enum: ['Eligible to Donate', 'Recent Surgery', 'Medical Condition', 'Temporarily Unavailable'],
+    default: 'Eligible to Donate'
+  },
+  isAvailable: { 
+    type: Boolean, 
+    default: true 
+  },
+  medicalReason: { 
+    type: String, 
+    default: "" 
+  },
+
   createdAt: {
     type: Date,
     default: Date.now

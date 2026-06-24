@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link } from 'react-router-dom'; // 🌟 Added Link for routing functionality
+import { Link } from 'react-router-dom'; 
 import Navbar from '../../components/Navbar/Navbar';
 import Hero from '../../components/Hero/Hero';
 import AboutSection from '../../components/AboutSection/AboutSection';
@@ -24,10 +24,9 @@ const Home = () => {
           <h3>Need Blood Urgently in your area?</h3>
           <p>Submit immediate verified medical broadcast requests out to target regions directly.</p>
         </div>
-        {/* 🌟 FIXED: Wrapped button with Link component to handle redirection */}
-        <Link to="/emergency">
-          <button className="banner-btn">Request Blood Now</button>
-        </Link>
+        
+        
+      
       </div>
 
       <BloodInfo />

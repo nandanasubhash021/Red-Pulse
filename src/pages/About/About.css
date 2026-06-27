@@ -51,7 +51,6 @@
 
 /* --- 1. Hero Section --- */
 .about-hero {
-  /* 🌟 NOTE: Background image properties are safely managed inside your About.jsx inline styles */
   min-height: 45vh;
   display: flex;
   align-items: center;
@@ -72,7 +71,7 @@
   color: var(--bg-white);
   margin-bottom: 1.25rem;  
   font-weight: 800;
-  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3); /* Soft text shadow for readability over high contrast image areas */
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
 }
 
 .about-hero p {
@@ -122,6 +121,7 @@
 .mv-card h2 {
   font-size: 1.75rem;
   margin-bottom: 1rem;
+  color: var(--text-dark) !important; /* 🌟 FIXED: Explicitly forces text to be dark and visible */
 }
 
 .mv-card p {
@@ -167,6 +167,7 @@
 .step-card h3 {
   font-size: 1.35rem;
   margin-bottom: 0.75rem;
+  color: var(--text-dark);
 }
 
 .step-card p {

@@ -15,6 +15,9 @@ app.use(express.json()); // Parses incoming json requests
 // 3. Define Main Application Routes
 app.use('/api/auth', require('./routes/auth'));
 
+// 🌟 ADDED: Emergency Blood Request & Notification System Routes Engine
+app.use('/api/requests', require('./routes/requests'));
+
 // 4. Fallback Root Diagnostic Endpoint
 app.get('/', (req, res) => {
   res.send('🔴 Red Pulse Active Monitoring System API is Running Online...');

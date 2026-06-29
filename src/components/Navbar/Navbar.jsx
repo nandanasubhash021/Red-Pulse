@@ -20,8 +20,14 @@ const Navbar = () => {
           <li>
             <Link to="/" className={location.pathname === '/' ? 'active' : ''}>Home</Link>
           </li>
+          {/* 🚀 MODIFIED: Redirects to the central resource hub and stays active on any of its sub-paths */}
           <li>
-            <Link to="/find-donors" className={location.pathname === '/find-donors' ? 'active' : ''}>Find Donors</Link>
+            <Link 
+              to="/find-blood" 
+              className={['/find-blood', '/find-donors', '/find-blood-banks'].includes(location.pathname) ? 'active' : ''}
+            >
+              Find Blood
+            </Link>
           </li>
           <li>
             <Link to="/about" className={location.pathname === '/about' ? 'active' : ''}>About</Link>

@@ -1,0 +1,110 @@
+/* ==========================================================================
+   Red Pulse Theme Unified Layout Stylesheet (Login & Authentication)
+   ========================================================================== */
+
+.rp-page-wrapper {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  background-color: #f9fafb;
+}
+
+.rp-card {
+  background: #ffffff;
+  padding: 2.5rem;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  border: 1px solid #e5e7eb;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.rp-card h2 {
+  font-size: 1.75rem;
+  color: #111827;
+  margin-top: 0;
+  font-weight: 700;
+}
+
+.rp-input-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  text-align: left;
+  margin-bottom: 1.25rem;
+  width: 100%;
+}
+
+.rp-input-group label {
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: #374151;
+}
+
+.rp-input {
+  width: 100%;
+  padding: 0.75rem 1rem;
+  font-size: 0.95rem;
+  border: 1px solid #d1d5db;
+  border-radius: 6px;
+  color: #1f2937;
+  outline: none;
+  box-sizing: border-box;
+  transition: border-color 0.15s ease, box-shadow 0.15s ease;
+}
+
+.rp-input:focus {
+  border-color: #e60026;
+  box-shadow: 0 0 0 3px rgba(230, 0, 38, 0.1);
+}
+
+.rp-submit-btn {
+  background-color: #e60026;
+  color: #ffffff;
+  font-weight: 600;
+  font-size: 1rem;
+  padding: 0.85rem 1.5rem;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color 0.15s ease;
+  width: 100%;
+}
+
+.rp-submit-btn:hover {
+  background-color: #c80020;
+}
+
+.rp-submit-btn:disabled {
+  background-color: #f3f4f6;
+  color: #9ca3af;
+  cursor: not-allowed;
+}
+
+.rp-alert-banner {
+  padding: 1rem;
+  border-radius: 6px;
+  font-size: 0.9rem;
+  font-weight: 500;
+  margin-bottom: 1.5rem;
+  text-align: left;
+}
+
+.rp-alert-error {
+  background-color: #fef2f2;
+  border: 1px solid #fecaca;
+  color: #991b1b;
+}
+
+.rp-inner-divider {
+  border: 0;
+  height: 1px;
+  background: #e5e7eb;
+  margin: 1.5rem 0;
+}
+
+@media (max-width: 640px) {
+  .rp-card {
+    padding: 1.75rem 1.25rem;
+  }
+}

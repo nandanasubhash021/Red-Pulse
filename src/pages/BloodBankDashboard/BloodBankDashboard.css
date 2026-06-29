@@ -1,8 +1,8 @@
 /* ==========================================================================
-   Red Pulse Theme Unified Layout Stylesheet (Registration & Forms)
+   Red Pulse Theme Layout Stylesheet (Blood Bank Operations Dashboard)
    ========================================================================== */
 
-/* Page Outer Scaffold */
+/* Page Outer Scaffold Canvas */
 .rp-page-wrapper {
   display: flex;
   flex-direction: column;
@@ -11,7 +11,7 @@
   font-family: inherit;
 }
 
-/* Base Form Wrapper Card */
+/* Base UI Component Content Card */
 .rp-card {
   background: #ffffff;
   padding: 2.5rem;
@@ -29,21 +29,11 @@
   font-weight: 700;
 }
 
-/* Multi-column Rows Grid */
-.rp-form-row {
-  display: flex;
-  gap: 1.25rem;
-  flex-wrap: wrap;
-  width: 100%;
-  margin-bottom: 1.25rem;
-}
-
-/* Field Wrappers */
+/* Individual Form Component Wrappers */
 .rp-input-group {
   display: flex;
   flex-direction: column;
   gap: 0.5rem;
-  flex: 1 1 200px;
   text-align: left;
 }
 
@@ -53,7 +43,7 @@
   color: #374151;
 }
 
-/* Fields & Inputs */
+/* Input, Text, and Select Option Dropdown Styling Rules */
 .rp-input {
   width: 100%;
   padding: 0.75rem 1rem;
@@ -72,38 +62,36 @@
   box-shadow: 0 0 0 3px rgba(230, 0, 38, 0.1);
 }
 
-/* Action Buttons */
+/* Standard Interactive Action Buttons */
 .rp-submit-btn {
   background-color: #e60026;
   color: #ffffff;
   font-weight: 600;
   font-size: 1rem;
-  padding: 0.85rem 1.5rem;
   border: none;
   border-radius: 6px;
   cursor: pointer;
-  transition: background-color 0.15s ease;
-  width: 100%;
+  box-sizing: border-box;
+  transition: background-color 0.15s ease, opacity 0.15s ease, transform 0.1s ease;
 }
 
 .rp-submit-btn:hover {
-  background-color: #c80020;
+  opacity: 0.95;
 }
 
-.rp-submit-btn:disabled {
-  background-color: #f3f4f6;
-  color: #9ca3af;
-  cursor: not-allowed;
+.rp-submit-btn:active {
+  transform: scale(0.98); /* Native press-down action feedback trick */
 }
 
-/* Notification Banners */
+/* System Alert Message Banner Elements */
 .rp-alert-banner {
   padding: 1rem;
   border-radius: 6px;
   font-size: 0.9rem;
   font-weight: 500;
-  margin-bottom: 1.5rem;
   text-align: left;
+  margin-bottom: 1rem;
+  box-sizing: border-box;
 }
 
 .rp-alert-error {
@@ -118,19 +106,38 @@
   color: #166534;
 }
 
-.rp-inner-divider {
-  border: 0;
-  height: 1px;
-  background: #e5e7eb;
-  margin: 1.5rem 0;
+/* Core Stock Inventory Ledger Table Design */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  text-align: left;
 }
 
-/* Responsive Rules */
-@media (max-width: 640px) {
-  .rp-card {
-    padding: 1.5rem;
-  }
-  .rp-input-group {
-    flex: 1 1 100%;
-  }
+th {
+  font-weight: 600;
+  color: #374151;
+  background-color: #f3f4f6;
+  padding: 12px 16px;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+td {
+  color: #4b5563;
+  padding: 12px 16px;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+tr:hover td {
+  background-color: #f9fafb; /* Slight highlight hint row marker on cursor hover */
+}
+
+/* Form Layout Container Positioning */
+.rp-submit-btn-container {
+  display: flex;
+  justify-content: flex-start;
+  width: 100%;
+}
+
+.rp-submit-btn-container .rp-submit-btn {
+  padding: 12px 24px; /* Generous sizing matching standard template guidelines */
 }

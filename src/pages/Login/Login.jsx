@@ -1,67 +1,53 @@
-import React, { useState } from 'react';
-import Navbar from "../../components/Navbar/Navbar";
+import React from 'react';
 import { useNavigate } from 'react-router-dom';
+import { BiUser, BiPlusMedical } from 'react-icons/bi';
+import Navbar from '../../components/Navbar/Navbar';
+import Footer from '../../components/Footer/Footer';
+import './Login.css';
 
 function Login() {
   const navigate = useNavigate();
-  const [credentials, setCredentials] = useState({ email: '', password: '' });
-
-  const handleLoginSubmit = async (e) => {
-    e.preventDefault();
-    try {
-      const response = await fetch('http://localhost:5000/api/auth/login', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(credentials)
-      });
-      
-      const data = await response.json();
-      
-      if (response.ok) {
-        // 1. Store authorization payload string securely
-        localStorage.setItem('token', data.token); 
-        
-        // 2. 🌟 REMOVED POPUP ALERT: Instantly slide right into the dashboard path
-        navigate('/dashboard'); 
-      } else {
-        alert(data.msg || 'Login failed');
-      }
-    } catch (err) {
-      console.error("Connection error:", err);
-      alert("Could not reach backend. Verify that your npm backend server is running.");
-    }
-  };
 
   return (
-    <>
+    <div className="rp-page-wrapper" style={{ display: 'flex', flexDirection: 'column', minHeight: '100vh' }}>
       <Navbar />
-      <div style={{ maxWidth: '400px', margin: '60px auto', padding: '30px', border: '1px solid #ddd', borderRadius: '8px', boxShadow: '0 4px 6px rgba(0,0,0,0.05)', backgroundColor: '#ffffff' }}>
-        <h2 style={{ color: '#cc0000', marginBottom: '20px', fontFamily: 'sans-serif' }}>Login</h2>
-        <form onSubmit={handleLoginSubmit}>
-          <label style={{ display: 'block', marginBottom: '5px', fontWeight: '600', color: '#333' }}>Email Address</label>
-          <input 
-            type="email" 
-            placeholder="Enter email" 
-            required 
-            style={{ width: '100%', padding: '10px', marginBottom: '15px', border: '1px solid #ccc', borderRadius: '6px', boxSizing: 'border-box' }} 
-            onChange={e => setCredentials({...credentials, email: e.target.value})} 
-          />
+      <div style={{ flex: 1, display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '2rem 1rem' }}>
+        <div className="rp-card" style={{ maxWidth: '500px', width: '100%', textAlign: 'center', padding: '2.5rem' }}>
+          <h2 style={{ marginBottom: '2rem', fontWeight: '700' }}>Login As</h2>
           
-          <label style={{ display: 'block', marginBottom: '5px', fontWeight: '600', color: '#333' }}>Password</label>
-          <input 
-            type="password" 
-            placeholder="Enter password" 
-            required 
-            style={{ width: '100%', padding: '10px', marginBottom: '20px', border: '1px solid #ccc', borderRadius: '6px', boxSizing: 'border-box' }} 
-            onChange={e => setCredentials({...credentials, password: e.target.value})} 
-          />
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '1.25rem' }}>
+            <button 
+              className="rp-submit-btn" 
+              style={{ width: '100%', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '12px', padding: '16px' }}
+              onClick={() => navigate('/login/user')}
+            >
+              <BiUser size={22} /> User
+            </button>
+            
+            <button 
+              className="rp-submit-btn" 
+              style={{ width: '100%', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '12px', padding: '16px', backgroundColor: '#1f2937' }}
+              onClick={() => navigate('/login/blood-bank')}
+            >
+              <BiPlusMedical size={20} /> Blood Bank
+            </button>
+          </div>
+
+          <hr className="rp-inner-divider" style={{ margin: '2rem 0', opacity: 0.2 }} />
           
-          <button type="submit" style={{ width: '100%', backgroundColor: '#cc0000', color: 'white', border: 'none', padding: '12px', borderRadius: '6px', cursor: 'pointer', fontWeight: 'bold', fontSize: '1rem' }}>
-            Login
-          </button>
-        </form>
+          <p style={{ margin: 0 }}>
+            Don't have an account?{' '}
+            <span 
+              style={{ color: '#e60026', fontWeight: '700', cursor: 'pointer' }}
+              onClick={() => navigate('/register')}
+            >
+              Register
+            </span>
+          </p>
+        </div>
       </div>
-    </>
+      <Footer />
+    </div>
   );
 }
 

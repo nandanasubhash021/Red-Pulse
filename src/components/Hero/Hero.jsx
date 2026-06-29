@@ -12,12 +12,12 @@ const Hero = () => {
           <p>Connecting donors, patients, and blood banks seamlessly in one trusted real-time automated network.</p>
           <div className="hero-actions">
             {/* Redirects to registration page */}
-            <Link to="/register">
+            <Link to="/register/user">
               <Button variant="primary">Become a Donor</Button>
             </Link>
             
             {/* Redirects to the dynamic search portal */}
-            <Link to="/find-donors">
+            <Link to="/find-blood">
               <Button variant="outline">Find Blood</Button>
             </Link>
           </div>

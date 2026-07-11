@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { BiCheck, BiX, BiPhoneCall, BiEnvelope, BiBuilding, BiMap, BiLayer } from 'react-icons/bi';
-import Header from './Header';
-import Footer from "../../components/Footer/Footer";
+import Navbar from '../../components/Navbar/Navbar';
+import Footer from '../../components/Footer/Footer';
 
 function UserDashboard() {
   const [activeTab, setActiveTab] = useState('request');
@@ -115,7 +115,7 @@ function UserDashboard() {
 
   return (
     <div className="rp-dashboard-layout" style={{ minHeight: '100vh', display: 'flex', flexDirection: 'column', background: '#f9fafb', position: 'relative' }}>
-      <Header />
+      <Navbar />
       
       <div style={{ flex: '1', display: 'flex', width: '100%', maxWidth: '1200px', margin: '2rem auto', padding: '0 1rem', gap: '2rem' }}>
         
@@ -193,7 +193,7 @@ function UserDashboard() {
             </div>
           )}
 
-          {/* TAB 2: REQUESTERS OPERATIONS PANELS (DISPLAYS ACCEPTER CORES ACCURATELY) */}
+          {/* TAB 2: REQUESTERS OPERATIONS PANELS */}
           {activeTab === 'track' && (
             <div>
               <h2 style={{ margin: '0 0 1.5rem 0', color: '#111827', fontSize: '1.5rem' }}>Track Active Broadcast Logs</h2>

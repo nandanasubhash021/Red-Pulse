@@ -19,35 +19,21 @@ function UserLogin() {
       
       const data = await response.json();
       
-      // 👇 Prints exactly what your backend returns to your console
       console.log("📦 RAW BACKEND RESPONSE STATUS:", response.status);
       console.log("📦 RAW BACKEND DATA BODY:", data);
       
       if (response.ok) {
         localStorage.setItem('token', data.token); 
         
-        // Safety check to capture different backend data layouts
+        // Save user role attribute if your backend still provides one
         if (data.user && data.user.role) {
           localStorage.setItem('userRole', data.user.role);
         } else if (data.role) {
           localStorage.setItem('userRole', data.role);
         }
         
-        const currentEmail = credentials.email.trim().toLowerCase();
-        const masterAdminEmail = 'nandanasubhash021@gmail.com'; 
-        
-        console.log("🔍 Checking match conditions...");
-        console.log("Is master email match?:", currentEmail === masterAdminEmail.toLowerCase());
-        console.log("Detected user role attribute:", data.user?.role || data.role);
-
-        // 👑 Force evaluation with fallback safeguards
-        if (currentEmail === masterAdminEmail.toLowerCase() || data.role === 'admin' || (data.user && data.user.role === 'admin')) {
-          console.log("✅ Admin verified! Forcing navigation to /admin/dashboard");
-          navigate('/admin/dashboard');
-        } else {
-          console.log("ℹ️ Regular account detected. Redirecting to user hub...");
-          navigate('/dashboard'); 
-        }
+        console.log("✅ Login successful! Redirecting to user hub...");
+        navigate('/dashboard'); 
       } else {
         console.warn("❌ Backend rejected authorization:", data);
         alert(data.msg || 'Login failed');

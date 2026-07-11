@@ -23,7 +23,7 @@ import BloodBankLogin from "../pages/Login/BloodBankLogin";
 
 // Dedicated Workspace Panels
 import BloodBankDashboard from "../pages/BloodBankDashboard/BloodBankDashboard";
-import AdminDashboard from "../pages/AdminDashboard/AdminDashboard"; 
+ 
 
 function AppRoutes() {
   return (

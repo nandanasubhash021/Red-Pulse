@@ -9,8 +9,13 @@ const app = express();
 connectDB();
 
 // 2. Middleware Configurations
+// Update the allowed origins array to include your new deployment URL
 app.use(cors({
-  origin: ['http://localhost:5173', 'https://red-pulse-beige.vercel.app'], // Permits both local development and your production build
+  origin: [
+    'http://localhost:5173', 
+    'https://red-pulse-beige.vercel.app',
+    'https://red-pulse-87c8.vercel.app' // <-- Add your exact live frontend URL here
+  ],
   credentials: true
 }));
 app.use(express.json()); // Parses incoming json requests

@@ -13,16 +13,22 @@ function FindDonors() {
     setLoading(true);
     setSearched(true);
     try {
-      // Fetch matching data from Express backend server
+      // 🚀 FIXED: Dynamic Environment Toggle (Local vs Live Production)
+      const BASE_URL = window.location.hostname === 'localhost'
+        ? 'http://localhost:5000'
+        : 'https://red-pulse-beige.vercel.app';
+
+      // Fetch matching data dynamically
       const response = await fetch(
-        `https://red-pulse-beige.vercel.app/api/auth/search?bloodGroup=${encodeURIComponent(bloodGroup)}&district=${encodeURIComponent(district)}`
+        `${BASE_URL}/api/auth/search?bloodGroup=${encodeURIComponent(bloodGroup)}&district=${encodeURIComponent(district)}`
       );
       const data = await response.json();
       
       if (response.ok) {
-        setDonors(data);
+        // Handle backend setups returning either data.donors array or root data array
+        setDonors(Array.isArray(data) ? data : (data.donors || []));
       } else {
-        alert('Failed to retrieve donor records.');
+        alert(data.msg || 'Failed to retrieve donor records.');
       }
     } catch (err) {
       console.error('Search error:', err);
@@ -49,7 +55,7 @@ function FindDonors() {
           
           <div style={{ flex: 2 }}>
             <label style={{ display: 'block', marginBottom: '5px', fontWeight: 'bold' }}>District / City:</label>
-            <input type="text" placeholder="e.g. Central District" value={district} style={{ width: '100%', padding: '10px', borderRadius: '4px', border: '1px solid #ccc', boxSizing: 'border-box' }} onChange={e => setDistrict(e.target.value)} />
+            <input type="text" placeholder="e.g. Ernakulam" value={district} style={{ width: '100%', padding: '10px', borderRadius: '4px', border: '1px solid #ccc', boxSizing: 'border-box' }} onChange={e => setDistrict(e.target.value)} />
           </div>
           
           <div style={{ display: 'flex', alignItems: 'flex-end' }}>
@@ -69,12 +75,12 @@ function FindDonors() {
         {/* Donors Card Grid Layout */}
         <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '20px' }}>
           {donors.map(donor => (
-            <div key={donor._id} style={{ border: '1px solid #ddd', padding: '20px', borderRadius: '8px', boxShadow: '0 2px 4px rgba(0,0,0,0.02)', position: 'relative', backgroundColor: '#fff' }}>
+            <div key={donor._id || donor.email} style={{ border: '1px solid #ddd', padding: '20px', borderRadius: '8px', boxShadow: '0 2px 4px rgba(0,0,0,0.02)', position: 'relative', backgroundColor: '#fff' }}>
               <div style={{ position: 'absolute', top: '15px', right: '15px', background: '#cc0000', color: 'white', width: '40px', height: '40px', borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center', fontWeight: 'bold' }}>
                 {donor.bloodGroup}
               </div>
               <h3 style={{ margin: '0 0 10px 0', color: '#333' }}>{donor.name}</h3>
-              <p style={{ margin: '5px 0', color: '#555' }}><strong>📍 Location:</strong> {donor.address}, {donor.district}</p>
+              <p style={{ margin: '5px 0', color: '#555' }}><strong>📍 Location:</strong> {donor.address || 'Not Provided'}, {donor.district}</p>
               <p style={{ margin: '5px 0', color: '#555' }}><strong>📞 Contact:</strong> {donor.phone}</p>
               <p style={{ margin: '5px 0', color: '#555' }}><strong>✉️ Email:</strong> {donor.email}</p>
             </div>

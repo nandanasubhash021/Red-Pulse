@@ -9,24 +9,35 @@ const app = express();
 connectDB();
 
 // 2. Middleware Configurations
-// Update the allowed origins array to include your new deployment URL
+const allowedOrigins = [
+  'http://localhost:5173',
+  'https://red-pulse-beige.vercel.app',
+  'https://red-pulse-87c8.vercel.app'
+];
+
 app.use(cors({
-  origin: [
-    'http://localhost:5173', 
-    'https://red-pulse-beige.vercel.app',
-    'https://red-pulse-87c8.vercel.app' // <-- Add your exact live frontend URL here
-  ],
-  credentials: true
+  origin: function (origin, callback) {
+    // Allow requests with no origin (like mobile apps or curl requests)
+    if (!origin) return callback(null, true);
+    if (allowedOrigins.indexOf(origin) === -1) {
+      const msg = 'The CORS policy for this site does not allow access from the specified Origin.';
+      return callback(new Error(msg), false);
+    }
+    return callback(null, true);
+  },
+  credentials: true,
+  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+  allowedHeaders: ['Content-Type', 'Authorization']
 }));
+
+// Explicitly handle preflight OPTIONS requests globally
+app.options('*', cors());
+
 app.use(express.json()); // Parses incoming json requests
 
 // 3. Define Main Application Routes
 app.use('/api/auth', require('./routes/auth'));
-
-// 🌟 Emergency Blood Request & Notification System Routes Engine
 app.use('/api/requests', require('./routes/requests'));
-
-// 👑 Administrative Dashboard System Gateway Pipeline
 app.use('/api/admin', require('./routes/admin'));
 
 // 4. Fallback Root Diagnostic Endpoint

@@ -8,7 +8,7 @@ const BloodBank = require('../models/BloodBank');
 
 // --- Helper: Centralized Donor Eligibility ---
 const calculateDonorStatus = (user) => {
-  if (!user.isAvailable) return { statusText: user.healthStatus || 'Medical Restriction', isEligible: false };
+  if (!user || !user.isAvailable) return { statusText: (user && user.healthStatus) || 'Medical Restriction', isEligible: false };
   if (!user.lastDonationDate) return { statusText: 'Eligible to Donate', isEligible: true };
 
   const lastDate = new Date(user.lastDonationDate);
@@ -28,12 +28,10 @@ router.post('/register', async (req, res) => {
     let user = await User.findOne({ email });
     if (user) return res.status(400).json({ msg: 'User already exists' });
 
-    // Note: If you register a regular account, it will default to 'user' via schema or standard declaration here
     user = new User({ name, email, phone, bloodGroup, district, address, password, role: 'user' });
     user.password = await bcrypt.hash(password, await bcrypt.genSalt(10));
     await user.save();
 
-    // 👑 Added role into token payload structure
     const token = jwt.sign(
       { user: { id: user.id, role: user.role || 'user' } }, 
       process.env.JWT_SECRET || 'redpulse_secret_key', 
@@ -56,14 +54,12 @@ router.post('/login', async (req, res) => {
       return res.status(400).json({ msg: 'Invalid credentials' });
     }
     
-    // 👑 Added role into token payload structure 
     const token = jwt.sign(
       { user: { id: user.id, role: user.role || 'user' } }, 
       process.env.JWT_SECRET || 'redpulse_secret_key', 
       { expiresIn: '3h' }
     );
     
-    // 👑 CRITICAL: Returns role explicitly to the frontend payload response object
     res.status(200).json({ 
       success: true,
       token, 
@@ -82,17 +78,22 @@ router.get('/me', async (req, res) => {
   } catch (err) { res.status(401).json({ msg: 'Invalid token' }); }
 });
 
-// --- FILTERED SEARCH ---
+// --- FILTERED SEARCH (FIXED DATE OBJECT CALCULATIONS) ---
 router.get('/search', async (req, res) => {
   try {
     const { bloodGroup, district } = req.query;
+    
     const today = new Date();
-    const maleCutoff = new Date(today - 90 * 24 * 60 * 60 * 1000);
-    const femaleCutoff = new Date(today - 120 * 24 * 60 * 60 * 1000);
+    // ✅ FIXED: Safe timestamps calculation parsing wrappers
+    const maleCutoff = new Date(today.getTime() - (90 * 24 * 60 * 60 * 1000));
+    const femaleCutoff = new Date(today.getTime() - (120 * 24 * 60 * 60 * 1000));
+
+    // Handle fallback if district isn't provided or is empty
+    const districtFilter = district ? { $regex: district, $options: 'i' } : { $exists: true };
 
     const donors = await User.find({
       bloodGroup,
-      district: { $regex: district, $options: 'i' },
+      district: districtFilter,
       isAvailable: true,
       $or: [
         { lastDonationDate: null },
@@ -100,20 +101,22 @@ router.get('/search', async (req, res) => {
         { gender: 'female', lastDonationDate: { $lte: femaleCutoff } }
       ]
     }).select('-password');
+    
     res.status(200).json(donors);
   } catch (err) { res.status(500).json({ msg: err.message }); }
 });
 
-// --- NEW ADDED ROUTE: SEARCH BLOOD BANKS BY INVENTORY CAPACITY ---
+// --- SEARCH BLOOD BANKS BY INVENTORY CAPACITY ---
 router.get('/search-blood-banks', async (req, res) => {
   try {
     const { bloodGroup, component, units, district } = req.query;
-    const unitsNeeded = Number(units);
-
+    const unitsNeeded = Number(units || 0);
     const inventoryPath = `inventory.${bloodGroup}.${component}`;
 
+    const districtFilter = district ? { $regex: district, $options: 'i' } : { $exists: true };
+
     const query = {
-      district: { $regex: district, $options: 'i' },
+      district: districtFilter,
       [inventoryPath]: { $gte: unitsNeeded }
     };
 
@@ -124,10 +127,12 @@ router.get('/search-blood-banks', async (req, res) => {
   }
 });
 
-// --- ADDED: MEDICAL UPDATE ROUTE (Fixes Timeout) ---
+// --- MEDICAL UPDATE ROUTE ---
 router.put('/update-medical', async (req, res) => {
   try {
     const token = req.headers['authorization']?.split(' ')[1];
+    if (!token) return res.status(401).json({ msg: 'No validation token provided.' });
+    
     const decoded = jwt.verify(token, process.env.JWT_SECRET || 'redpulse_secret_key');
     const user = await User.findById(decoded.user.id);
     

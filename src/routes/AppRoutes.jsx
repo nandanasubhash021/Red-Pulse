@@ -52,8 +52,7 @@ function AppRoutes() {
       {/* Blood Bank Operation Panels */}
       <Route path="/blood-bank/dashboard" element={<BloodBankDashboard />} />
       
-      {/* 👑 Administrative Dashboard Portal */}
-      <Route path="/admin/dashboard" element={<AdminDashboard />} />
+    
       
       {/* Sidebar Navigation Fallback Redirects */}
       <Route path="/blood-bank/inventory" element={<Navigate to="/blood-bank/dashboard" replace />} />

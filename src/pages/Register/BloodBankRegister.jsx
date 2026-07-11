@@ -24,7 +24,7 @@ function BloodBankRegister() {
     setIsSubmitting(true);
     try {
       // 🌟 UPDATED: Pointing to the central route handled by routes/auth.js
-      const res = await fetch('https://red-pulse-beige.vercel.app/api/auth/bloodbank/register', {
+      const res = await fetch('https://red-pulse-ivory.vercel.app/api/auth/bloodbank/register', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(formData)

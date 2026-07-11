@@ -38,7 +38,7 @@ function UserDashboard() {
 
   const fetchNotifications = async () => {
     try {
-      const res = await axios.get('https://red-pulse-beige.vercel.app/api/requests/notifications', config);
+      const res = await axios.get('https://red-pulse-ivory.vercel.app/api/requests/notifications', config);
       if (res.data.success) setNotifications(res.data.notifications);
     } catch (err) {
       console.error("Failed loading notifications list:", err);
@@ -47,7 +47,7 @@ function UserDashboard() {
 
   const fetchMyRequests = async () => {
     try {
-      const res = await axios.get('https://red-pulse-beige.vercel.app/api/requests/active', config);
+      const res = await axios.get('https://red-pulse-ivory.vercel.app/api/requests/active', config);
       if (res.data.success) setMyRequests(res.data.requests);
     } catch (err) {
       console.error("Error getting personal tracking logs:", err);
@@ -61,7 +61,7 @@ function UserDashboard() {
   const handleFormSubmit = async (e) => {
     e.preventDefault();
     try {
-      const res = await axios.post('https://red-pulse-beige.vercel.app/api/requests/create', formData, config);
+      const res = await axios.post('https://red-pulse-ivory.vercel.app/api/requests/create', formData, config);
       if (res.data.success) {
         alert("Emergency blood request broadcasted successfully!");
         setFormData({ bloodGroup: '', unitsRequired: '', emergencyLevel: 'Normal', hospitalName: '', district: '', additionalNotes: '' });
@@ -75,7 +75,7 @@ function UserDashboard() {
 
   const handleNotificationResponse = async (requestId, actionState) => {
     try {
-      const res = await axios.post('https://red-pulse-beige.vercel.app/api/requests/respond', { 
+      const res = await axios.post('https://red-pulse-ivory.vercel.app/api/requests/respond', { 
         requestId: requestId, 
         action: actionState 
       }, config);
@@ -102,7 +102,7 @@ function UserDashboard() {
     setLoadingDonors(true);
     setActiveTrackingId(requestId);
     try {
-      const res = await axios.get(`https://red-pulse-beige.vercel.app/api/requests/accepted-donors/${requestId}`, config);
+      const res = await axios.get(`https://red-pulse-ivory.vercel.app/api/requests/accepted-donors/${requestId}`, config);
       if (res.data.success) {
         setSelectedRequestDonors(res.data.donors);
       }

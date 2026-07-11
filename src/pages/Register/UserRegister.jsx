@@ -35,7 +35,7 @@ function UserRegister() {
     e.preventDefault();
     try {
       // Connects directly to your Express server running on port 5000
-      const response = await fetch('https://red-pulse-beige.vercel.app/api/auth/register', {
+      const response = await fetch('https://red-pulse-ivory.vercel.app/api/auth/register', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ ...formData, eligibilityAnswers: eligibility })

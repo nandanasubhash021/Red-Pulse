@@ -18,7 +18,7 @@ function BloodBankLogin() {
 
     try {
       // 🌟 UPDATED: Adjusted to hit the centralized backend endpoint under routes/auth.js
-      const res = await fetch('https://red-pulse-beige.vercel.app/api/auth/bloodbank/login', {
+      const res = await fetch('https://red-pulse-ivory.vercel.app/api/auth/bloodbank/login', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ email, password })

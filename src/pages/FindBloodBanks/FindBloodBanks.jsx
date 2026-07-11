@@ -38,7 +38,7 @@ const FindBloodBanks = () => {
       setResults([]); 
       
       // 3. Note: Change https://red-pulse-87c8.vercel.app/ to match your actual Backend server port if different
-      const response = await axios.get('https://red-pulse-beige.vercel.app/api/auth/search-blood-banks', { 
+      const response = await axios.get('https://red-pulse-ivory.vercel.app/api/auth/search-blood-banks', { 
         params: formData 
       });
       

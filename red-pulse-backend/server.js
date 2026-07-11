@@ -11,7 +11,7 @@ connectDB();
 // 2. Middleware Configurations
 const allowedOrigins = [
   'http://localhost:5173',
-  'https://red-pulse-beige.vercel.app',
+  'https://red-pulse-ivory.vercel.app',
   'https://red-pulse-87c8.vercel.app'
 ];
 

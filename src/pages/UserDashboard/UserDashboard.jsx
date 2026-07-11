@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { BiCheck, BiX, BiPhoneCall, BiEnvelope, BiBuilding, BiMap, BiLayer } from 'react-icons/bi';
 import Header from './Header';
-import Footer from './Footer';
+import Footer from "../../components/Footer/Footer";
 
 function UserDashboard() {
   const [activeTab, setActiveTab] = useState('request');

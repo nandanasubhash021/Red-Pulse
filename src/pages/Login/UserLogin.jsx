@@ -2,14 +2,16 @@ import React, { useState } from 'react';
 import Navbar from "../../components/Navbar/Navbar";
 import { useNavigate } from 'react-router-dom';
 
-function Login() {
+function UserLogin() {
   const navigate = useNavigate();
   const [credentials, setCredentials] = useState({ email: '', password: '' });
 
   const handleLoginSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await fetch('http://localhost:5000/api/auth/login', {
+      console.log("🚀 Sending credentials to login pipeline:", credentials.email);
+      
+      const response = await fetch('https://red-pulse-beige.vercel.app/api/auth/login', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(credentials)
@@ -17,18 +19,42 @@ function Login() {
       
       const data = await response.json();
       
+      // 👇 Prints exactly what your backend returns to your console
+      console.log("📦 RAW BACKEND RESPONSE STATUS:", response.status);
+      console.log("📦 RAW BACKEND DATA BODY:", data);
+      
       if (response.ok) {
-        // 1. Store authorization payload string securely
         localStorage.setItem('token', data.token); 
         
-        // 2. 🌟 REMOVED POPUP ALERT: Instantly slide right into the dashboard path
-        navigate('/dashboard'); 
+        // Safety check to capture different backend data layouts
+        if (data.user && data.user.role) {
+          localStorage.setItem('userRole', data.user.role);
+        } else if (data.role) {
+          localStorage.setItem('userRole', data.role);
+        }
+        
+        const currentEmail = credentials.email.trim().toLowerCase();
+        const masterAdminEmail = 'nandanasubhash021@gmail.com'; 
+        
+        console.log("🔍 Checking match conditions...");
+        console.log("Is master email match?:", currentEmail === masterAdminEmail.toLowerCase());
+        console.log("Detected user role attribute:", data.user?.role || data.role);
+
+        // 👑 Force evaluation with fallback safeguards
+        if (currentEmail === masterAdminEmail.toLowerCase() || data.role === 'admin' || (data.user && data.user.role === 'admin')) {
+          console.log("✅ Admin verified! Forcing navigation to /admin/dashboard");
+          navigate('/admin/dashboard');
+        } else {
+          console.log("ℹ️ Regular account detected. Redirecting to user hub...");
+          navigate('/dashboard'); 
+        }
       } else {
+        console.warn("❌ Backend rejected authorization:", data);
         alert(data.msg || 'Login failed');
       }
     } catch (err) {
-      console.error("Connection error:", err);
-      alert("Could not reach backend. Verify that your npm backend server is running.");
+      console.error("💥 Severe connection error:", err);
+      alert("Could not reach backend. Verify that your backend server is running.");
     }
   };
 
@@ -65,4 +91,4 @@ function Login() {
   );
 }
 
-export default Login;
+export default UserLogin;

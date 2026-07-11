@@ -28,12 +28,23 @@ router.post('/register', async (req, res) => {
     let user = await User.findOne({ email });
     if (user) return res.status(400).json({ msg: 'User already exists' });
 
-    user = new User({ name, email, phone, bloodGroup, district, address, password });
+    // Note: If you register a regular account, it will default to 'user' via schema or standard declaration here
+    user = new User({ name, email, phone, bloodGroup, district, address, password, role: 'user' });
     user.password = await bcrypt.hash(password, await bcrypt.genSalt(10));
     await user.save();
 
-    const token = jwt.sign({ user: { id: user.id } }, process.env.JWT_SECRET || 'redpulse_secret_key', { expiresIn: '3h' });
-    res.status(200).json({ token, user: { id: user.id, name: user.name } });
+    // 👑 Added role into token payload structure
+    const token = jwt.sign(
+      { user: { id: user.id, role: user.role || 'user' } }, 
+      process.env.JWT_SECRET || 'redpulse_secret_key', 
+      { expiresIn: '3h' }
+    );
+    
+    res.status(200).json({ 
+      success: true,
+      token, 
+      user: { id: user.id, name: user.name, email: user.email, role: user.role || 'user' } 
+    });
   } catch (err) { res.status(500).json({ msg: err.message }); }
 });
 
@@ -41,10 +52,23 @@ router.post('/login', async (req, res) => {
   try {
     const { email, password } = req.body;
     const user = await User.findOne({ email });
-    if (!user || !(await bcrypt.compare(password, user.password))) return res.status(400).json({ msg: 'Invalid credentials' });
+    if (!user || !(await bcrypt.compare(password, user.password))) {
+      return res.status(400).json({ msg: 'Invalid credentials' });
+    }
     
-    const token = jwt.sign({ user: { id: user.id } }, process.env.JWT_SECRET || 'redpulse_secret_key', { expiresIn: '3h' });
-    res.status(200).json({ token, user: { id: user.id, name: user.name } });
+    // 👑 Added role into token payload structure 
+    const token = jwt.sign(
+      { user: { id: user.id, role: user.role || 'user' } }, 
+      process.env.JWT_SECRET || 'redpulse_secret_key', 
+      { expiresIn: '3h' }
+    );
+    
+    // 👑 CRITICAL: Returns role explicitly to the frontend payload response object
+    res.status(200).json({ 
+      success: true,
+      token, 
+      user: { id: user.id, name: user.name, email: user.email, role: user.role || 'user' } 
+    });
   } catch (err) { res.status(500).json({ msg: err.message }); }
 });
 
@@ -86,7 +110,6 @@ router.get('/search-blood-banks', async (req, res) => {
     const { bloodGroup, component, units, district } = req.query;
     const unitsNeeded = Number(units);
 
-    // Dynamically maps values to match your schema path hierarchy (e.g., inventory.A+.platelets)
     const inventoryPath = `inventory.${bloodGroup}.${component}`;
 
     const query = {

@@ -15,8 +15,11 @@ app.use(express.json()); // Parses incoming json requests
 // 3. Define Main Application Routes
 app.use('/api/auth', require('./routes/auth'));
 
-// 🌟 ADDED: Emergency Blood Request & Notification System Routes Engine
+// 🌟 Emergency Blood Request & Notification System Routes Engine
 app.use('/api/requests', require('./routes/requests'));
+
+// 👑 Administrative Dashboard System Gateway Pipeline
+app.use('/api/admin', require('./routes/admin'));
 
 // 4. Fallback Root Diagnostic Endpoint
 app.get('/', (req, res) => {
@@ -24,10 +27,7 @@ app.get('/', (req, res) => {
 });
 
 // 5. Fire up Server Listener
-if (process.env.NODE_ENV !=='production'){
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => {
   console.log(`🚀 Server started on port ${PORT}`);
 });
-}
-module.exports=app;

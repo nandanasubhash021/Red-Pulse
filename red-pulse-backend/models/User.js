@@ -30,6 +30,14 @@ const UserSchema = new mongoose.Schema({
     type: String,
     required: true
   },
+  
+  // 👑 NEW: SYSTEM ACCESS CONTROL CONFIGURATION 
+  role: {
+    type: String,
+    enum: ['user', 'admin'],
+    default: 'user'
+  },
+
   eligibilityAnswers: {
     age: { type: String },
     weight: { type: String },
@@ -37,8 +45,6 @@ const UserSchema = new mongoose.Schema({
     hadRecentSurgery: { type: Boolean, default: false },
     daysSinceLastDonation: { type: Number, default: 100 }
   },
-
-  // 🌟 NEW ELIGIBILITY & HEALTH TRACKING FIELDS
   gender: { 
     type: String, 
     enum: ['male', 'female'], 
@@ -61,7 +67,6 @@ const UserSchema = new mongoose.Schema({
     type: String, 
     default: "" 
   },
-
   createdAt: {
     type: Date,
     default: Date.now

@@ -25,7 +25,7 @@ function BloodBankDashboard() {
     if (!token) return navigate('/blood-bank/login'); 
     
     try {
-      const res = await fetch('http://localhost:5000/api/auth/bloodbank/me', {
+      const res = await fetch('https://red-pulse-beige.vercel.app/api/auth/bloodbank/me', {
         headers: { 'Authorization': `Bearer ${token}` }
       });
       if (res.ok) {
@@ -51,7 +51,7 @@ function BloodBankDashboard() {
     const token = localStorage.getItem('bb_token');
     try {
       // 🌟 FIXED: Target updated to match centralized /api/auth pathing routing framework
-      const res = await fetch('http://localhost:5000/api/auth/bloodbank/inventory', {
+      const res = await fetch('https://red-pulse-beige.vercel.app/api/auth/bloodbank/inventory', {
         method: 'PUT',
         headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${token}` },
         body: JSON.stringify({ bloodGroup: selectedGroup, component: selectedComponent, units: Number(unitsDelta), action })
@@ -73,7 +73,7 @@ function BloodBankDashboard() {
     const token = localStorage.getItem('bb_token');
     try {
       // 🌟 FIXED: Target updated to point cleanly through the /api/auth centralized proxy handler route
-      const res = await fetch('http://localhost:5000/api/auth/bloodbank/profile', {
+      const res = await fetch('https://red-pulse-beige.vercel.app/api/auth/bloodbank/profile', {
         method: 'PUT',
         headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${token}` },
         body: JSON.stringify(profileForm)

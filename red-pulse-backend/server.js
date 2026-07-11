@@ -9,7 +9,10 @@ const app = express();
 connectDB();
 
 // 2. Middleware Configurations
-app.use(cors()); // Enables cross-origin fetching between front & back ends
+app.use(cors({
+  origin: ['http://localhost:5173', 'https://red-pulse-beige.vercel.app'], // Permits both local development and your production build
+  credentials: true
+}));
 app.use(express.json()); // Parses incoming json requests
 
 // 3. Define Main Application Routes
@@ -26,8 +29,5 @@ app.get('/', (req, res) => {
   res.send('🔴 Red Pulse Active Monitoring System API is Running Online...');
 });
 
-// 5. Fire up Server Listener
-const PORT = process.env.PORT || 5000;
-app.listen(PORT, () => {
-  console.log(`🚀 Server started on port ${PORT}`);
-});
+// Export the configured app instance
+module.exports = app;

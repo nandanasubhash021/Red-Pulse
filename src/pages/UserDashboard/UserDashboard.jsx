@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { BiCheck, BiX, BiPhoneCall, BiEnvelope, BiBuilding, BiMap, BiLayer } from 'react-icons/bi';
-import Header from './Header';
+import Navbar from "../../components/Navbar/Navbar";
 import Footer from "../../components/Footer/Footer";
 
 function UserDashboard() {
@@ -115,7 +115,7 @@ function UserDashboard() {
 
   return (
     <div className="rp-dashboard-layout" style={{ minHeight: '100vh', display: 'flex', flexDirection: 'column', background: '#f9fafb', position: 'relative' }}>
-      <Header />
+      <Navbar />
       
       <div style={{ flex: '1', display: 'flex', width: '100%', maxWidth: '1200px', margin: '2rem auto', padding: '0 1rem', gap: '2rem' }}>
         

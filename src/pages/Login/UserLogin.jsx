@@ -19,8 +19,8 @@ function UserLogin() {
       
       const data = await response.json();
       
-      console.log("📦 RAW BACKEND RESPONSE STATUS:", response.status);
-      console.log("📦 RAW BACKEND DATA BODY:", data);
+      console.log("📦 RAW BACKEND DATA BODY:", JSON.stringify(data, null, 2));
+      console.warn("❌ Backend rejected authorization:", JSON.stringify(data, null, 2));
       
       if (response.ok) {
         localStorage.setItem('token', data.token); 
